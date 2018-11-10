@@ -10,9 +10,11 @@ There are 3 functions that execute 3 queries one function execute one query from
 
 In each query I made the connection to the database and created a cursor object then executed the query using the cursor after that I displayed the result then close the connection.
 
-**Note:** before displaying any query result I had to do some changes for the output before displaying it.
-I created 2 view to simplify the third query 
-The view E_table it has 2 column the date and the count (the number of rejected requests to the website that have 404 not found error)
+**Note:** 
+* before displaying any query result I had to do some changes for the output before displaying it.
+
+**I created 2 view to simplify the third query**
+*The view E_table it has 2 column the date and the count (the number of rejected requests to the website that have 404 not found error)
 
 View "public.e_table"
  Column |  Type  | Modifiers 
@@ -21,7 +23,7 @@ View "public.e_table"
  count  | bigint | 
 
 
-The view E_table it has 2 column the date and the count (the number of total requests to the website)
+* The view T_table it has 2 column the date and the count (the number of total requests to the website)
 And the the view T_table 
 
 View "public.t_table"
