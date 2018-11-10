@@ -16,6 +16,9 @@ In each query I made the connection to the database and created a cursor object 
 **I created 2 view to simplify the third query**
 * The view E_table it has 2 column the date and the count (the number of rejected requests to the website that have 404 not found error)
 
+this is the statement for it
+`create view E_table as select concat(date_part('month',time),'/',date_part('day',time),'/',date_part('year',time)) as date,count(status) from log where status = '404 NOT FOUND' group by date order by date;`
+
 View "public.e_table"
  Column |  Type  | Modifiers 
 --------+--------+-----------
@@ -24,7 +27,10 @@ View "public.e_table"
 
 
 * The view T_table it has 2 column the date and the count (the number of total requests to the website)
+
 And the the view T_table 
+this is the statemnet for it 
+`create view T_table as select concat(date_part('month',time),'/',date_part('day',time),'/',date_part('year',time)) as date,count(status) from log group by date;`
 
 View "public.t_table"
  Column |  Type  | Modifiers 

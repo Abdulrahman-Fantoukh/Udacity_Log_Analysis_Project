@@ -3,13 +3,15 @@ import psycopg2
 
 db_Name = "news"
 
-
 def Query1():
     connection = psycopg2.connect(database=db_Name)
     cursor = connection.cursor()
-    query = '''select title,count(path) as views from log join articles on
-    path like concat('%',slug,'%') where status = '200 OK' group by title
-    order by views desc limit 3 ;'''
+    query = '''select title, count(*) as views
+       from log join articles
+       on log.path = concat('/article/', articles.slug)
+       group by title
+       order by views desc
+       limit 3;'''
     cursor.execute(query)
     result = cursor.fetchall()
     cursor.close()
@@ -24,9 +26,11 @@ def Query1():
 def Query2():
     connection = psycopg2.connect(database=db_Name)
     cursor = connection.cursor()
-    query = '''select name,views from authors join (select author,count(path)
-    as views from log join articles on path like concat('%',slug,'%')
-    where status = '200 OK' group by author) as t on authors.id = t.author
+    query = '''select name,views
+    from authors join (select author,count(path) as views
+    from log join articles on log.path = concat('/article/', articles.slug)
+    where status = '200 OK'
+    group by author) as t on authors.id = t.author
     order by views desc;'''
     cursor.execute(query)
     result = cursor.fetchall()
